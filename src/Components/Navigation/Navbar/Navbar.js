@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './Navbar.module.css';
-import NavigationItem from '../NavigationItem/NavigationItem';
+import NavigationItem from '../navigationItem/NavigationItem';
 
 const Navbar = () => (
   <header className={styles.Header}>
@@ -11,7 +11,7 @@ const Navbar = () => (
         <NavigationItem link="/">Home</NavigationItem>
         <NavigationItem link="/protected">Protected Page</NavigationItem>
         <NavigationItem link="/login">Login</NavigationItem>
-        <NavigationItem link="/register">Register</NavigationItem>
+        <NavigationItem link="/signup">Register</NavigationItem>
       </nav>
     </div>
   </header>

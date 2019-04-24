@@ -1,4 +1,6 @@
 .MainContent {
+  display: flex;
+  align-items: center;
   margin-top: 6rem;
   margin-left: auto;
   margin-right: auto;

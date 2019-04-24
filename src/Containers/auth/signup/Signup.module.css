@@ -1,0 +1,16 @@
+.FormWrapper {
+  max-width: 70rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rem 8rem;
+  width: 100%;
+  border-radius: 0.3rem;
+  margin: 0 auto;
+  box-shadow: 0rem 0.5rem 1.5rem var(--shadow);
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+}

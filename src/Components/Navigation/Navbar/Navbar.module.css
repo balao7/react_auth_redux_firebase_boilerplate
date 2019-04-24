@@ -1,5 +1,5 @@
 .Header {
-  background-color: transparent;
+  background-color: var(--color-primary);
   color: #333;
   position: fixed;
   z-index: 1;

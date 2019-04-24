@@ -1,0 +1,27 @@
+.Button {
+  padding: 1rem 3rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  box-shadow: 0rem 0.3rem 1.5rem var(--shadow);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: all 0.2s;
+}
+
+.Button:hover {
+  transform: translateY(-3px);
+}
+
+.Button:active {
+  transform: translateY(2px);
+}
+
+.Button:disabled {
+  background-color: #c7c6c6;
+  cursor: not-allowed;
+}

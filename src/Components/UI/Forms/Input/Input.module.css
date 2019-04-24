@@ -1,0 +1,60 @@
+.InputGroup {
+  width: 100%;
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
+  color: var(--color-secondary);
+}
+
+.InputGroup:last-of-type {
+  margin-bottom: 7rem;
+}
+
+.Input {
+  width: 100%;
+  font-size: 1.2rem;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  color: var(--color-secondary);
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-secondary);
+  opacity: 1;
+  transition: all 0.2s;
+}
+
+.Input::placeholder {
+  color: inherit;
+}
+
+.errorMessagePlaceholder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  padding: 0rem 1.5rem;
+  transform: translateY(0);
+  font-weight: 700;
+  color: var(--color-red);
+  transition: all 0.2s;
+}
+
+.errorMessage {
+  transform: translateY(15px);
+  opacity: 1;
+  visibility: visible;
+}
+
+.InputGroup.Error .Input {
+  border-color: var(--color-red);
+}
+
+.Input:active,
+.Input:focus {
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-primary);
+}

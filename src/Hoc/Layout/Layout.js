@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './Layout.module.css';
-import Navbar from '../../Components/Navigation/Navbar/Navbar';
+import Navbar from '../../components/navigation/navbar/Navbar';
 
 const Layout = ({ children }) => {
   return (
