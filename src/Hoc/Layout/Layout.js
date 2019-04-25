@@ -4,17 +4,22 @@ import { connect } from 'react-redux';
 import styles from './Layout.module.css';
 import Navbar from '../../components/navigation/navbar/Navbar';
 
-const Layout = ({ children }) => {
+const Layout = ({ auth, children }) => {
   return (
     <>
-      <Navbar />
+      <Navbar auth={auth} />
       <main className={styles.MainContent}>{children}</main>
     </>
   );
 };
 
-const mapStateToProps = ({ auth }) => ({
-  auth,
+const mapStateToProps = ({ firebase }) => ({
+  auth: firebase.auth,
 });
 
-export default connect(mapStateToProps)(Layout);
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Layout);

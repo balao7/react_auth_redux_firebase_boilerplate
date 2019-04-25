@@ -17,7 +17,7 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('No password provided.'),
 });
 
-const Login = props => {
+const Login = ({ signIn, authError }) => {
   return (
     <div className={styles.FormWrapper}>
       <Heading type="h1">Sign in </Heading>
@@ -28,7 +28,7 @@ const Login = props => {
         }}
         validationSchema={LoginSchema}
         onSubmit={(values, { setSubmitting }) => {
-          props.signIn(values);
+          signIn(values);
           setSubmitting(false);
         }}
       >
@@ -53,17 +53,20 @@ const Login = props => {
           </Form>
         )}
       </Formik>
+      <div className={styles.ErrorMessage}>{authError}</div>
     </div>
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = ({ auth }) => ({
+  authError: auth.authError,
+});
 
 const mapDispatchToProps = {
   signIn: actions.signIn,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);
