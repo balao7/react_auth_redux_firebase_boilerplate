@@ -4,9 +4,9 @@ import * as Yup from 'yup';
 import { connect } from 'react-redux';
 
 import styles from './Login.module.css';
-import Input from '../../../components/UI/Forms/Input/Input';
-import Button from '../../../components/UI/Button/Button';
-import Heading from '../../../components/UI/Heading/Heading';
+import Input from '../../../components/UI/forms/input/Input';
+import Button from '../../../components/UI/button/Button';
+import Heading from '../../../components/UI/heading/Heading';
 
 import * as actions from '../../../store/actions';
 

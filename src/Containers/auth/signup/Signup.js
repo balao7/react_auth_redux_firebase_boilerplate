@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { connect } from 'react-redux';
 
 import styles from './Signup.module.css';
-import Input from '../../../components/UI/Forms/Input/Input';
-import Button from '../../../components/UI/Button/Button';
-import Heading from '../../../components/UI/Heading/Heading';
+import Input from '../../../components/UI/forms/input/Input';
+import Button from '../../../components/UI/button/Button';
+import Heading from '../../../components/UI/heading/Heading';
+
+import * as actions from '../../../store/actions';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -27,7 +30,7 @@ const SignupSchema = Yup.object().shape({
     .required('You must re-type your password.'),
 });
 
-const SignUp = props => {
+const SignUp = ({ signUp, authError }) => {
   return (
     <div className={styles.FormWrapper}>
       <Heading type="h1">Create an Account</Heading>
@@ -41,10 +44,8 @@ const SignUp = props => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          signUp(values);
+          setSubmitting(false);
         }}
       >
         {({ isSubmitting, isValid }) => (
@@ -90,8 +91,20 @@ const SignUp = props => {
           </Form>
         )}
       </Formik>
+      <div className={styles.ErrorMessage}>{authError}</div>
     </div>
   );
 };
 
-export default SignUp;
+const mapStateToProps = ({ auth }) => ({
+  authError: auth.authError,
+});
+
+const mapDispatchToProps = {
+  signUp: actions.signUp,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);

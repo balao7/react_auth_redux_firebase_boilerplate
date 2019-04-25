@@ -12,8 +12,6 @@ const Logout = ({ signOut }) => {
   return <Redirect to="/" />;
 };
 
-const mapStateToProps = state => ({});
-
 const mapDispatchToProps = {
   signOut: actions.signOut,
 };

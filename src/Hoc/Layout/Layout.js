@@ -17,9 +17,4 @@ const mapStateToProps = ({ firebase }) => ({
   auth: firebase.auth,
 });
 
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Layout);
+export default connect(mapStateToProps)(Layout);

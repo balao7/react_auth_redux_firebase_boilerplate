@@ -1,2 +1,7 @@
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
+
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_FAIL = 'SIGNUP_FAIL';
+
+export const SET_REDIRECT_AFTER_LOGIN = 'SET_REDIRECT_AFTER_LOGIN';
