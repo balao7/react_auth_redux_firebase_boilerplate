@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { connect } from 'react-redux';
 
 import styles from './Login.module.css';
 import Input from '../../../components/UI/Forms/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Heading from '../../../components/UI/Heading/Heading';
+
+import * as actions from '../../../store/actions';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -25,10 +28,8 @@ const Login = props => {
         }}
         validationSchema={LoginSchema}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          props.signIn(values);
+          setSubmitting(false);
         }}
       >
         {({ isSubmitting, isValid }) => (
@@ -56,4 +57,13 @@ const Login = props => {
   );
 };
 
-export default Login;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  signIn: actions.signIn,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login);
