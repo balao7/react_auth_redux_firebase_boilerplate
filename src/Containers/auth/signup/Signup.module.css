@@ -15,6 +15,13 @@
   flex-direction: column;
 }
 
+.Loading {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
 .ErrorMessage {
   text-align: center;
   margin-top: 3rem;

@@ -24,5 +24,9 @@
 
 .NavRight {
   height: 100%;
+}
+
+.NavUl {
   display: flex;
+  height: 100%;
 }

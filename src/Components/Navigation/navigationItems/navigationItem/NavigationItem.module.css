@@ -1,8 +1,14 @@
+.NavLi {
+  height: 100%;
+  list-style: none;
+  display: flex;
+}
+
 .NavigationItem {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 0rem 2rem;
   margin: 0 1rem;
   font-weight: 700;
   font-size: 1.2rem;

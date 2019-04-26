@@ -17,7 +17,7 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('No password provided.'),
 });
 
-const Login = ({ signIn, authError }) => {
+const Login = ({ signIn, authError, loading }) => {
   return (
     <div className={styles.FormWrapper}>
       <Heading type="h1">Sign in </Heading>
@@ -53,6 +53,7 @@ const Login = ({ signIn, authError }) => {
           </Form>
         )}
       </Formik>
+      <div className={styles.Loading}>{loading ? 'Logging in...' : null}</div>
       <div className={styles.ErrorMessage}>{authError}</div>
     </div>
   );
@@ -60,6 +61,7 @@ const Login = ({ signIn, authError }) => {
 
 const mapStateToProps = ({ auth }) => ({
   authError: auth.authError,
+  loading: auth.loadingAuth,
 });
 
 const mapDispatchToProps = {

@@ -30,7 +30,7 @@ const SignupSchema = Yup.object().shape({
     .required('You must re-type your password.'),
 });
 
-const SignUp = ({ signUp, authError }) => {
+const SignUp = ({ signUp, authError, loading }) => {
   return (
     <div className={styles.FormWrapper}>
       <Heading type="h1">Create an Account</Heading>
@@ -91,6 +91,7 @@ const SignUp = ({ signUp, authError }) => {
           </Form>
         )}
       </Formik>
+      <div className={styles.Loading}>{loading ? 'Signing up...' : null}</div>
       <div className={styles.ErrorMessage}>{authError}</div>
     </div>
   );
@@ -98,6 +99,7 @@ const SignUp = ({ signUp, authError }) => {
 
 const mapStateToProps = ({ auth }) => ({
   authError: auth.authError,
+  loading: auth.loadingAuth,
 });
 
 const mapDispatchToProps = {

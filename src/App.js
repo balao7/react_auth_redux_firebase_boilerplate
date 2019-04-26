@@ -7,6 +7,7 @@ import Home from './containers/home/Home';
 import ExampleContainer from './containers/exampleContainer/ExampleContainer';
 import Login from './containers/auth/login/Login';
 import SignUp from './containers/auth/signup/Signup';
+import Profile from './containers/auth/profile/Profile';
 import Logout from './containers/auth/logout/Logout';
 
 function App({ auth }) {
@@ -16,6 +17,7 @@ function App({ auth }) {
     routes = (
       <Switch>
         <Route path="/protected" component={ExampleContainer} />
+        <Route path="/profile" component={Profile} />
         <Route path="/logout" component={Logout} />
         <Route path="/" component={Home} />
         <Redirect to="/" />
