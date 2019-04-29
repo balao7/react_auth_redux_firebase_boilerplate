@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import styles from './VerifyEmail.module.css';
@@ -10,7 +10,12 @@ import SuccessMessage from '../../../components/UI/messages/successMessage/Succe
 
 import * as actions from '../../../store/actions';
 
-const VerifyEmail = ({ sendVerification, error, loading }) => {
+const VerifyEmail = ({ clear, sendVerification, error, loading }) => {
+  useEffect(() => {
+    return () => {
+      clear();
+    };
+  }, [clear]);
   return (
     <div className={styles.Wrapper}>
       <Heading type="h3">Account not verified</Heading>
@@ -40,6 +45,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = {
   sendVerification: actions.sendVerificationEmail,
+  clear: actions.clear,
 };
 
 export default connect(
