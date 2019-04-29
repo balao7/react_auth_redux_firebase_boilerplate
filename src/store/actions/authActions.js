@@ -93,9 +93,16 @@ export const updateProfile = data => async (
   { getFirestore, getFirebase }
 ) => {
   const firestore = getFirestore();
-  const userId = getState().firebase.auth.uid;
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  const { uid: userId, email: userEmail } = getState().firebase.auth;
   dispatch({ type: actionTypes.EDIT_PROFILE_START });
   try {
+    // change email, if is different from actual
+    if (data.email !== userEmail) {
+      await user.updateEmail(data.email);
+    }
+
     // save user to firebase with the doc id being the new created id we got from the response
     await firestore
       .collection('users')

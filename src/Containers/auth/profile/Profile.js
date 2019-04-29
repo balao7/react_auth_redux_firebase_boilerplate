@@ -21,6 +21,9 @@ const Profilechema = Yup.object().shape({
     .min(2, 'Too Short.')
     .max(50, 'Too Long.')
     .required('Your last name is required.'),
+  email: Yup.string()
+    .email('Invalid email.')
+    .required('Email is required.'),
 });
 
 const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
@@ -37,6 +40,7 @@ const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
         initialValues={{
           firstName: firebase.profile.firstName,
           lastName: firebase.profile.lastName,
+          email: firebase.auth.email,
         }}
         validationSchema={Profilechema}
         onSubmit={(values, { setSubmitting }) => {
@@ -57,6 +61,13 @@ const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
               type="text"
               name="lastName"
               placeholder="Last Name"
+              component={Input}
+            />
+
+            <Field
+              type="email"
+              name="email"
+              placeholder="Email"
               component={Input}
             />
 
