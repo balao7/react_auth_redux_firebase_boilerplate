@@ -29,7 +29,7 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, authError: payload };
 
     case actionTypes.AUTH_START:
-      return { ...state, loadingAuth: true };
+      return { ...state, loadingAuth: true, authError: null };
 
     case actionTypes.AUTH_END:
       return { ...state, loadingAuth: false };

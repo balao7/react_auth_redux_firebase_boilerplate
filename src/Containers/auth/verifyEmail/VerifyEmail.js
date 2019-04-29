@@ -22,14 +22,13 @@ const VerifyEmail = ({ sendVerification, verificationEmailError, loading }) => {
       </div>
       <Heading type="h5">Don't see it?</Heading>
 
-      <Button onClick={sendVerification}>Send again</Button>
-      <div className={`${styles.Loading} ${loading ? styles.Show : null}`}>
-        {loading ? 'Sending...' : null}
-      </div>
+      <Button loading={loading} onClick={sendVerification}>
+        Send again
+      </Button>
       <SuccessMessage show={loading === false ? true : false}>
         Verification email sent!
       </SuccessMessage>
-      <ErrorMessage show={verificationEmailError ? true : false}>
+      <ErrorMessage show={verificationEmailError}>
         {verificationEmailError}
       </ErrorMessage>
     </div>

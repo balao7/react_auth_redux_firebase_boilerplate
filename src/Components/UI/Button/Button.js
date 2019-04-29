@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Button.module.css';
 
-const Button = ({ onClick, type, disabled, children }) => {
+const Button = ({ onClick, type, disabled, loading, children }) => {
   return (
     <button
       className={styles.Button}
@@ -10,7 +10,16 @@ const Button = ({ onClick, type, disabled, children }) => {
       type={type}
       disabled={disabled}
     >
-      {children}
+      {loading ? (
+        <div className={styles.Loading}>
+          <div />
+          <div />
+          <div />
+          <div />
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 };

@@ -54,14 +54,17 @@ const Login = ({ signIn, authError, loading, clearError }) => {
               placeholder="Password"
               component={Input}
             />
-            <Button type="submit" disabled={isSubmitting || !isValid}>
+            <Button
+              loading={loading}
+              type="submit"
+              disabled={isSubmitting || !isValid}
+            >
               Login
             </Button>
           </Form>
         )}
       </Formik>
-      <div className={styles.Loading}>{loading ? 'Logging in...' : null}</div>
-      <ErrorMessage show={authError ? true : false}>{authError}</ErrorMessage>
+      <ErrorMessage show={authError}>{authError}</ErrorMessage>
     </div>
   );
 };

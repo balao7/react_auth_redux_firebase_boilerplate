@@ -92,13 +92,16 @@ const SignUp = ({ signUp, authError, loading, clearError }) => {
               component={Input}
             />
 
-            <Button type="submit" disabled={isSubmitting || !isValid}>
+            <Button
+              loading={loading}
+              type="submit"
+              disabled={isSubmitting || !isValid}
+            >
               Sign Up
             </Button>
           </Form>
         )}
       </Formik>
-      <div className={styles.Loading}>{loading ? 'Signing up...' : null}</div>
       <ErrorMessage show={authError ? true : false}>{authError}</ErrorMessage>
     </div>
   );
