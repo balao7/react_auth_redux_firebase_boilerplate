@@ -64,7 +64,7 @@ export const signOut = () => async (dispatch, getState, { getFirebase }) => {
   try {
     await firebase.auth().signOut();
   } catch (err) {
-    console.log('err logging out');
+    console.log('error logging out');
   }
 };
 
@@ -86,8 +86,6 @@ export const sendVerificationEmail = () => async (
       type: actionTypes.VERIFICATION_EMAIL_FAIL,
       payload: err.message,
     });
-    console.log(err.message);
-    // dispatch email fail message here
   }
 };
 
@@ -98,7 +96,7 @@ export const updateProfile = data => async (
 ) => {
   const firestore = getFirestore();
   const userId = getState().firebase.auth.uid;
-  dispatch({ type: actionTypes.AUTH_START });
+  dispatch({ type: actionTypes.EDIT_PROFILE_START });
   try {
     // save user to firebase with the doc id being the new created id we got from the response
     await firestore
@@ -112,7 +110,6 @@ export const updateProfile = data => async (
   } catch (err) {
     dispatch({ type: actionTypes.EDIT_PROFILE_FAIL, payload: err.message });
   }
-  dispatch({ type: actionTypes.AUTH_END });
 };
 
 export const clearError = () => ({

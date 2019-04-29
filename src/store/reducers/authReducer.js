@@ -42,10 +42,19 @@ const signUpFail = (state, payload) => {
   return updateObject(state, { error: payload });
 };
 
+const editProfileStart = state => {
+  return updateObject(state, {
+    profile: updateObject(state.profile, {
+      loading: true,
+    }),
+  });
+};
+
 const editProfileSuccess = state => {
   return updateObject(state, {
     profile: updateObject(state.profile, {
-      error: null,
+      error: false,
+      loading: false,
     }),
   });
 };
@@ -54,6 +63,7 @@ const editProfileFail = (state, payload) => {
   return updateObject(state, {
     profile: updateObject(state.profile, {
       error: payload,
+      loading: false,
     }),
   });
 };
@@ -107,6 +117,9 @@ export default (state = initialState, { type, payload }) => {
 
     case actionTypes.SIGNUP_FAIL:
       return signUpFail(state, payload);
+
+    case actionTypes.EDIT_PROFILE_START:
+      return editProfileStart(state);
 
     case actionTypes.EDIT_PROFILE_SUCCESS:
       return editProfileSuccess(state);

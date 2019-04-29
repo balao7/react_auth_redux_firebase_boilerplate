@@ -7,6 +7,8 @@ import styles from './Profile.module.css';
 import Input from '../../../components/UI/forms/input/Input';
 import Button from '../../../components/UI/button/Button';
 import Heading from '../../../components/UI/heading/Heading';
+import ErrorMessage from '../../../components/UI/messages/errorMessage/ErrorMessage';
+import SuccessMessage from '../../../components/UI/messages/successMessage/SuccessMessage';
 
 import * as actions from '../../../store/actions';
 
@@ -53,15 +55,20 @@ const Profile = ({ error, firebase, updateProfile, loading }) => {
               component={Input}
             />
 
-            <Button type="submit" disabled={isSubmitting || !isValid}>
+            <Button
+              loading={loading}
+              type="submit"
+              disabled={isSubmitting || !isValid}
+            >
               Edit
             </Button>
           </Form>
         )}
       </Formik>
-
-      <div className={styles.Loading}>{loading ? 'Updating...' : null}</div>
-      <div className={styles.ErrorMessage}>{error}</div>
+      <SuccessMessage show={!loading && error === false}>
+        Updated
+      </SuccessMessage>
+      <ErrorMessage show={error}>{error}</ErrorMessage>
     </div>
   );
 };
