@@ -5,11 +5,12 @@ import styles from './VerifyEmail.module.css';
 import Paragraph from '../../../components/UI/paragraph/Paragraph';
 import Button from '../../../components/UI/button/Button';
 import Heading from '../../../components/UI/heading/Heading';
+import ErrorMessage from '../../../components/UI/messages/errorMessage/ErrorMessage';
+import SuccessMessage from '../../../components/UI/messages/successMessage/SuccessMessage';
 
 import * as actions from '../../../store/actions';
 
 const VerifyEmail = ({ sendVerification, verificationEmailError, loading }) => {
-  console.log(loading);
   return (
     <div className={styles.Wrapper}>
       <Heading type="h3">Account not verified</Heading>
@@ -25,18 +26,12 @@ const VerifyEmail = ({ sendVerification, verificationEmailError, loading }) => {
       <div className={`${styles.Loading} ${loading ? styles.Show : null}`}>
         {loading ? 'Sending...' : null}
       </div>
-      <div
-        className={`${styles.Sent} ${loading === false ? styles.Show : null}`}
-      >
-        {loading === false ? 'Sent!' : null}
-      </div>
-      <div
-        className={`${styles.ErrorMessage} ${
-          verificationEmailError ? styles.Show : null
-        }`}
-      >
+      <SuccessMessage show={loading === false ? true : false}>
+        Verification email sent!
+      </SuccessMessage>
+      <ErrorMessage show={verificationEmailError ? true : false}>
         {verificationEmailError}
-      </div>
+      </ErrorMessage>
     </div>
   );
 };

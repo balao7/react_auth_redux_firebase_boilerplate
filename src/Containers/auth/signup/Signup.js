@@ -7,6 +7,7 @@ import styles from './Signup.module.css';
 import Input from '../../../components/UI/forms/input/Input';
 import Button from '../../../components/UI/button/Button';
 import Heading from '../../../components/UI/heading/Heading';
+import ErrorMessage from '../../../components/UI/messages/errorMessage/ErrorMessage';
 
 import * as actions from '../../../store/actions';
 
@@ -30,7 +31,13 @@ const SignupSchema = Yup.object().shape({
     .required('You must re-type your password.'),
 });
 
-const SignUp = ({ signUp, authError, loading }) => {
+const SignUp = ({ signUp, authError, loading, clearError }) => {
+  useEffect(() => {
+    return () => {
+      clearError();
+    };
+  }, [clearError]);
+
   return (
     <div className={styles.FormWrapper}>
       <Heading type="h1">Create an Account</Heading>
@@ -92,7 +99,7 @@ const SignUp = ({ signUp, authError, loading }) => {
         )}
       </Formik>
       <div className={styles.Loading}>{loading ? 'Signing up...' : null}</div>
-      <div className={styles.ErrorMessage}>{authError}</div>
+      <ErrorMessage show={authError ? true : false}>{authError}</ErrorMessage>
     </div>
   );
 };
@@ -104,6 +111,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = {
   signUp: actions.signUp,
+  clearError: actions.clearError,
 };
 
 export default connect(

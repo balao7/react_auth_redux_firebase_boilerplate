@@ -47,6 +47,9 @@ export default (state = initialState, { type, payload }) => {
         loadingEmail: null,
       };
 
+    case actionTypes.CLEAR_ERROR:
+      return { ...state, authError: null };
+
     default:
       return state;
   }

@@ -4,4 +4,5 @@ export {
   signUp,
   updateProfile,
   sendVerificationEmail,
+  clearError,
 } from './authActions';

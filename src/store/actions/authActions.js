@@ -112,3 +112,7 @@ export const updateProfile = data => async (
   }
   dispatch({ type: actionTypes.AUTH_END });
 };
+
+export const clearError = () => ({
+  type: actionTypes.CLEAR_ERROR,
+});

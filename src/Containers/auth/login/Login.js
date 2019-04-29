@@ -7,6 +7,7 @@ import styles from './Login.module.css';
 import Input from '../../../components/UI/forms/input/Input';
 import Button from '../../../components/UI/button/Button';
 import Heading from '../../../components/UI/heading/Heading';
+import ErrorMessage from '../../../components/UI/messages/errorMessage/ErrorMessage';
 
 import * as actions from '../../../store/actions';
 
@@ -17,7 +18,13 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('No password provided.'),
 });
 
-const Login = ({ signIn, authError, loading }) => {
+const Login = ({ signIn, authError, loading, clearError }) => {
+  useEffect(() => {
+    return () => {
+      clearError();
+    };
+  }, [clearError]);
+
   return (
     <div className={styles.FormWrapper}>
       <Heading type="h1">Sign in </Heading>
@@ -54,7 +61,7 @@ const Login = ({ signIn, authError, loading }) => {
         )}
       </Formik>
       <div className={styles.Loading}>{loading ? 'Logging in...' : null}</div>
-      <div className={styles.ErrorMessage}>{authError}</div>
+      <ErrorMessage show={authError ? true : false}>{authError}</ErrorMessage>
     </div>
   );
 };
@@ -66,6 +73,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = {
   signIn: actions.signIn,
+  clearError: actions.clearError,
 };
 
 export default connect(

@@ -20,7 +20,9 @@ function App({ auth }) {
     console.log('got here');
     routes = (
       <Switch>
-        <Route path="/verify-email" component={VerifyEmail} />
+        <Route exact path="/verify-email" component={VerifyEmail} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/logout" component={Logout} />
         <Redirect to="/verify-email" />
       </Switch>
     );
@@ -28,10 +30,10 @@ function App({ auth }) {
     // logged routes
     routes = (
       <Switch>
-        <Route path="/protected" component={ExampleContainer} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/logout" component={Logout} />
-        <Route path="/" component={Home} />
+        <Route exact path="/protected" component={ExampleContainer} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/logout" component={Logout} />
+        <Route exact path="/" component={Home} />
         <Redirect to="/" />
       </Switch>
     );
