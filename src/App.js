@@ -13,7 +13,6 @@ import VerifyEmail from './containers/auth/verifyEmail/VerifyEmail';
 import RecoverPassword from './containers/auth/recoverPassword/RecoverPassword';
 
 function App({ auth }) {
-  console.log(auth.emailVerified);
   let routes;
 
   // logged but not verified

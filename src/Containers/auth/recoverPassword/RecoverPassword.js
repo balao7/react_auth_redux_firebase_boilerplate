@@ -28,6 +28,9 @@ const RecoverPassword = ({ clear, resetPassword, error, loading }) => {
     <div className={styles.FormWrapper}>
       <Heading type="h1">Recover your password</Heading>
       <Formik
+        initialValues={{
+          email: '',
+        }}
         validationSchema={ResetPasswordSchema}
         onSubmit={(values, { setSubmitting }) => {
           resetPassword(values.email);
