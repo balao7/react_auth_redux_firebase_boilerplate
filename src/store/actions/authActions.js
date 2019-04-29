@@ -116,3 +116,17 @@ export const updateProfile = data => async (
 export const clearError = () => ({
   type: actionTypes.CLEAR_ERROR,
 });
+
+export const resetPassword = email => async (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
+  const auth = getFirebase().auth();
+  try {
+    const res = await auth.sendPasswordResetEmail(email);
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+};

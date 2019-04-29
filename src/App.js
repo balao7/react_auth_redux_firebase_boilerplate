@@ -10,6 +10,7 @@ import SignUp from './containers/auth/signup/Signup';
 import Profile from './containers/auth/profile/Profile';
 import Logout from './containers/auth/logout/Logout';
 import VerifyEmail from './containers/auth/verifyEmail/VerifyEmail';
+import RecoverPassword from './containers/auth/recoverPassword/RecoverPassword';
 
 function App({ auth }) {
   console.log(auth.emailVerified);
@@ -17,7 +18,6 @@ function App({ auth }) {
 
   // logged but not verified
   if (auth.uid && auth.emailVerified === false) {
-    console.log('got here');
     routes = (
       <Switch>
         <Route exact path="/verify-email" component={VerifyEmail} />
@@ -45,6 +45,7 @@ function App({ auth }) {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/recover-password" component={RecoverPassword} />
         <Route exact path="/" component={Home} />
         <Redirect to="/" />
       </Switch>

@@ -1,0 +1,13 @@
+.CustomLink {
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.CustomLink:hover {
+  transform: translateY(-5px);
+}
+
+.CustomLink:active {
+  transform: translateY(1px);
+}

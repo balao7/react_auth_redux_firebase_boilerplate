@@ -31,7 +31,7 @@ const SignupSchema = Yup.object().shape({
     .required('You must re-type your password.'),
 });
 
-const SignUp = ({ signUp, authError, loading, clearError }) => {
+const SignUp = ({ signUp, error, loading, clearError }) => {
   useEffect(() => {
     return () => {
       clearError();
@@ -102,14 +102,14 @@ const SignUp = ({ signUp, authError, loading, clearError }) => {
           </Form>
         )}
       </Formik>
-      <ErrorMessage show={authError ? true : false}>{authError}</ErrorMessage>
+      <ErrorMessage show={error}>{error}</ErrorMessage>
     </div>
   );
 };
 
 const mapStateToProps = ({ auth }) => ({
-  authError: auth.authError,
-  loading: auth.loadingAuth,
+  error: auth.error,
+  loading: auth.loading,
 });
 
 const mapDispatchToProps = {

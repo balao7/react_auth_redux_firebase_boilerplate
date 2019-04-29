@@ -1,6 +1,6 @@
 .Heading {
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin: 3rem 0;
   /* text-transform: uppercase; */
   color: var(--color-primary);
 }

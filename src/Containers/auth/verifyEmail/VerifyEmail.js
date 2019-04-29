@@ -10,7 +10,7 @@ import SuccessMessage from '../../../components/UI/messages/successMessage/Succe
 
 import * as actions from '../../../store/actions';
 
-const VerifyEmail = ({ sendVerification, verificationEmailError, loading }) => {
+const VerifyEmail = ({ sendVerification, error, loading }) => {
   return (
     <div className={styles.Wrapper}>
       <Heading type="h3">Account not verified</Heading>
@@ -26,18 +26,16 @@ const VerifyEmail = ({ sendVerification, verificationEmailError, loading }) => {
         Send again
       </Button>
       <SuccessMessage show={loading === false ? true : false}>
-        Verification email sent!
+        Verification email sent.
       </SuccessMessage>
-      <ErrorMessage show={verificationEmailError}>
-        {verificationEmailError}
-      </ErrorMessage>
+      <ErrorMessage show={error}>{error}</ErrorMessage>
     </div>
   );
 };
 
 const mapStateToProps = ({ auth }) => ({
-  verificationEmailError: auth.verificationEmailError,
-  loading: auth.loadingEmail,
+  error: auth.verificationEmail.error,
+  loading: auth.verificationEmail.loading,
 });
 
 const mapDispatchToProps = {

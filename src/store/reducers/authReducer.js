@@ -1,54 +1,130 @@
 import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../../hoc/utility/updateObject';
 
 const initialState = {
-  authError: null,
-  profileError: null,
-  loadingAuth: false,
-  verificationEmailError: null,
-  loadingEmail: null,
+  profile: {
+    error: null,
+    loading: false,
+  },
+  verificationEmail: {
+    error: null,
+    loading: false,
+  },
+  passwordRecovery: {
+    error: null,
+    loading: false,
+  },
+  error: null,
+  loading: false,
+};
+
+const authSuccess = state => {
+  return updateObject(state, { error: null });
+};
+
+const authFail = (state, payload) => {
+  return updateObject(state, { error: payload });
+};
+
+const authStart = state => {
+  return updateObject(state, { loading: true, error: null });
+};
+
+const authEnd = state => {
+  return updateObject(state, { loading: false });
+};
+
+const signUpSuccess = state => {
+  return updateObject(state, { error: null });
+};
+
+const signUpFail = (state, payload) => {
+  return updateObject(state, { error: payload });
+};
+
+const editProfileSuccess = state => {
+  return updateObject(state, {
+    profile: updateObject(state.profile, {
+      error: null,
+    }),
+  });
+};
+
+const editProfileFail = (state, payload) => {
+  return updateObject(state, {
+    profile: updateObject(state.profile, {
+      error: payload,
+    }),
+  });
+};
+
+const verificationEmailStart = state => {
+  return updateObject(state, {
+    verificationEmail: updateObject(state.verificationEmail, {
+      loading: true,
+    }),
+  });
+};
+
+const verificationEmailSuccess = state => {
+  return updateObject(state, {
+    verificationEmail: updateObject(state.verificationEmail, {
+      error: null,
+      loading: false,
+    }),
+  });
+};
+
+const verificationEmailFail = (state, payload) => {
+  return updateObject(state, {
+    verificationEmail: updateObject(state.verificationEmail, {
+      error: payload,
+      loading: false,
+    }),
+  });
+};
+
+const clearError = state => {
+  return updateObject(state, { error: null });
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case actionTypes.AUTH_SUCCESS:
-      return { ...state, authError: null };
+      return authSuccess(state);
 
     case actionTypes.AUTH_FAIL:
-      return { ...state, authError: payload };
-
-    case actionTypes.SIGNUP_SUCCESS:
-      return { ...state, authError: null };
-
-    case actionTypes.SIGNUP_FAIL:
-      return { ...state, authError: payload };
-
-    case actionTypes.EDIT_PROFILE_SUCCESS:
-      return { ...state, profileError: null };
-
-    case actionTypes.EDIT_PROFILE_FAIL:
-      return { ...state, authError: payload };
+      return authFail(state, payload);
 
     case actionTypes.AUTH_START:
-      return { ...state, loadingAuth: true, authError: null };
+      return authStart(state);
 
     case actionTypes.AUTH_END:
-      return { ...state, loadingAuth: false };
+      return authEnd(state);
+
+    case actionTypes.SIGNUP_SUCCESS:
+      return signUpSuccess(state);
+
+    case actionTypes.SIGNUP_FAIL:
+      return signUpFail(state, payload);
+
+    case actionTypes.EDIT_PROFILE_SUCCESS:
+      return editProfileSuccess(state);
+
+    case actionTypes.EDIT_PROFILE_FAIL:
+      return editProfileFail(state, payload);
 
     case actionTypes.VERIFICATION_EMAIL_START:
-      return { ...state, loadingEmail: true };
+      return verificationEmailStart(state);
 
     case actionTypes.VERIFICATION_EMAIL_SUCCESS:
-      return { ...state, verificationEmailError: null, loadingEmail: false };
+      return verificationEmailSuccess(state);
 
     case actionTypes.VERIFICATION_EMAIL_FAIL:
-      return {
-        ...state,
-        verificationEmailError: payload,
-        loadingEmail: null,
-      };
+      return verificationEmailFail(state, payload);
 
     case actionTypes.CLEAR_ERROR:
-      return { ...state, authError: null };
+      return clearError(state);
 
     default:
       return state;

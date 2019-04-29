@@ -21,7 +21,7 @@ const Profilechema = Yup.object().shape({
     .required('Your last name is required.'),
 });
 
-const Profile = ({ profileError, firebase, updateProfile, loading }) => {
+const Profile = ({ error, firebase, updateProfile, loading }) => {
   if (!firebase.profile.isLoaded) return null;
   return (
     <div className={styles.FormWrapper}>
@@ -61,15 +61,15 @@ const Profile = ({ profileError, firebase, updateProfile, loading }) => {
       </Formik>
 
       <div className={styles.Loading}>{loading ? 'Updating...' : null}</div>
-      <div className={styles.ErrorMessage}>{profileError}</div>
+      <div className={styles.ErrorMessage}>{error}</div>
     </div>
   );
 };
 
 const mapStateToProps = ({ firebase, auth }) => ({
   firebase,
-  profileError: auth.profileError,
-  loading: auth.loadingAuth,
+  error: auth.profile.error,
+  loading: auth.profile.loading,
 });
 
 const mapDispatchToProps = { updateProfile: actions.updateProfile };
