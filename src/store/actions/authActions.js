@@ -112,8 +112,9 @@ export const updateProfile = data => async (
   }
 };
 
-export const clearError = () => ({
-  type: actionTypes.CLEAR_ERROR,
+// To clear errors and some stuff when components unmount
+export const clear = () => ({
+  type: actionTypes.CLEAR,
 });
 
 export const resetPassword = email => async (

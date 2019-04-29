@@ -31,12 +31,12 @@ const SignupSchema = Yup.object().shape({
     .required('You must re-type your password.'),
 });
 
-const SignUp = ({ signUp, error, loading, clearError }) => {
+const SignUp = ({ signUp, error, loading, clear }) => {
   useEffect(() => {
     return () => {
-      clearError();
+      clear();
     };
-  }, [clearError]);
+  }, [clear]);
 
   return (
     <div className={styles.FormWrapper}>
@@ -114,7 +114,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = {
   signUp: actions.signUp,
-  clearError: actions.clearError,
+  clear: actions.clear,
 };
 
 export default connect(

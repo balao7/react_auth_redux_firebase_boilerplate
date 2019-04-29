@@ -19,12 +19,12 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('No password provided.'),
 });
 
-const Login = ({ signIn, error, loading, clearError }) => {
+const Login = ({ signIn, error, loading, clear }) => {
   useEffect(() => {
     return () => {
-      clearError();
+      clear();
     };
-  }, [clearError]);
+  }, [clear]);
 
   return (
     <div className={styles.FormWrapper}>
@@ -80,7 +80,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = {
   signIn: actions.signIn,
-  clearError: actions.clearError,
+  clear: actions.clear,
 };
 
 export default connect(

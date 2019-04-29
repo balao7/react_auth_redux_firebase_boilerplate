@@ -5,5 +5,5 @@ export {
   resetPassword,
   updateProfile,
   sendVerificationEmail,
-  clearError,
+  clear,
 } from './authActions';

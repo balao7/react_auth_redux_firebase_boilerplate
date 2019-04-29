@@ -94,8 +94,19 @@ const verificationEmailFail = (state, payload) => {
   });
 };
 
-const clearError = state => {
-  return updateObject(state, { error: null });
+const clear = state => {
+  return updateObject(state, {
+    profile: updateObject(state.profile, {
+      error: null,
+    }),
+    verificationEmail: updateObject(state.verificationEmail, {
+      error: null,
+    }),
+    passwordRecovery: updateObject(state.passwordRecovery, {
+      error: null,
+    }),
+    error: null,
+  });
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -136,8 +147,8 @@ export default (state = initialState, { type, payload }) => {
     case actionTypes.VERIFICATION_EMAIL_FAIL:
       return verificationEmailFail(state, payload);
 
-    case actionTypes.CLEAR_ERROR:
-      return clearError(state);
+    case actionTypes.CLEAR:
+      return clear(state);
 
     default:
       return state;

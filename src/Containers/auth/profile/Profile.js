@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -23,7 +23,12 @@ const Profilechema = Yup.object().shape({
     .required('Your last name is required.'),
 });
 
-const Profile = ({ error, firebase, updateProfile, loading }) => {
+const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
+  useEffect(() => {
+    return () => {
+      clear();
+    };
+  }, [clear]);
   if (!firebase.profile.isLoaded) return null;
   return (
     <div className={styles.FormWrapper}>
@@ -79,7 +84,10 @@ const mapStateToProps = ({ firebase, auth }) => ({
   loading: auth.profile.loading,
 });
 
-const mapDispatchToProps = { updateProfile: actions.updateProfile };
+const mapDispatchToProps = {
+  updateProfile: actions.updateProfile,
+  clear: actions.clear,
+};
 
 export default connect(
   mapStateToProps,
