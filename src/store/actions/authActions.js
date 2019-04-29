@@ -122,11 +122,17 @@ export const resetPassword = email => async (
   getState,
   { getFirebase }
 ) => {
+  dispatch({ type: actionTypes.RECOVER_PASSWORD_START });
   const auth = getFirebase().auth();
   try {
     const res = await auth.sendPasswordResetEmail(email);
     console.log(res);
+    dispatch({ type: actionTypes.RECOVER_PASSWORD_SUCCESS });
   } catch (error) {
     console.log(error);
+    dispatch({
+      type: actionTypes.RECOVER_PASSWORD_FAIL,
+      payload: error.message,
+    });
   }
 };

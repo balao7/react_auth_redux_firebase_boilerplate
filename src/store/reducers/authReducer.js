@@ -94,6 +94,32 @@ const verificationEmailFail = (state, payload) => {
   });
 };
 
+const recoverPasswordStart = state => {
+  return updateObject(state, {
+    passwordRecovery: updateObject(state.passwordRecovery, {
+      loading: true,
+    }),
+  });
+};
+
+const recoverPasswordSuccess = state => {
+  return updateObject(state, {
+    passwordRecovery: updateObject(state.passwordRecovery, {
+      error: false,
+      loading: false,
+    }),
+  });
+};
+
+const recoverPasswordFail = (state, payload) => {
+  return updateObject(state, {
+    passwordRecovery: updateObject(state.passwordRecovery, {
+      error: payload,
+      loading: false,
+    }),
+  });
+};
+
 const clear = state => {
   return updateObject(state, {
     profile: updateObject(state.profile, {
@@ -146,6 +172,15 @@ export default (state = initialState, { type, payload }) => {
 
     case actionTypes.VERIFICATION_EMAIL_FAIL:
       return verificationEmailFail(state, payload);
+
+    case actionTypes.RECOVER_PASSWORD_START:
+      return recoverPasswordStart(state);
+
+    case actionTypes.RECOVER_PASSWORD_SUCCESS:
+      return recoverPasswordSuccess(state);
+
+    case actionTypes.RECOVER_PASSWORD_FAIL:
+      return recoverPasswordFail(state, payload);
 
     case actionTypes.CLEAR:
       return clear(state);

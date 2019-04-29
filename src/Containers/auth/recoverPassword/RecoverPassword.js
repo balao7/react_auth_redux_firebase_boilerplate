@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
@@ -18,7 +18,12 @@ const ResetPasswordSchema = Yup.object().shape({
     .required('Email is required.'),
 });
 
-const RecoverPassword = ({ resetPassword, error, loading }) => {
+const RecoverPassword = ({ clear, resetPassword, error, loading }) => {
+  useEffect(() => {
+    return () => {
+      clear();
+    };
+  }, [clear]);
   return (
     <div className={styles.FormWrapper}>
       <Heading type="h1">Recover your password</Heading>
@@ -43,12 +48,12 @@ const RecoverPassword = ({ resetPassword, error, loading }) => {
               type="submit"
               disabled={isSubmitting || !isValid}
             >
-              Sign Up
+              Recover
             </Button>
           </Form>
         )}
       </Formik>
-      <SuccessMessage show={loading === false ? true : false}>
+      <SuccessMessage show={!loading && error === false}>
         Check your email to recover your password.
       </SuccessMessage>
       <ErrorMessage show={error}>{error}</ErrorMessage>
@@ -63,6 +68,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = {
   resetPassword: actions.resetPassword,
+  clear: actions.clear,
 };
 
 export default connect(
