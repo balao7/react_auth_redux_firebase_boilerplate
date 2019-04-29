@@ -1,0 +1,71 @@
+.Wrapper {
+  max-width: 70rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8rem 8rem;
+  width: 100%;
+  border-radius: 0.3rem;
+  margin: 0 auto;
+  transition: all 0.2s;
+  box-shadow: 0rem 0.5rem 1.5rem var(--shadow);
+}
+
+.textWrapper {
+  margin-bottom: 20px;
+}
+
+.Loading {
+  display: none;
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  transition: opacity 1s ease-out;
+}
+
+.ErrorMessage {
+  display: none;
+  text-align: center;
+  margin-top: 3rem;
+  color: var(--color-red);
+  font-size: 1.3rem;
+  font-weight: 700;
+  transition: opacity 1s ease-out;
+}
+
+.Sent {
+  display: none;
+  text-align: center;
+  margin-top: 3rem;
+  color: var(--color-green);
+  font-size: 1.3rem;
+  font-weight: 700;
+  transition: opacity 1s ease-out;
+}
+
+.ErrorMessage.Show,
+.Loading.Show,
+.Sent.Show {
+  display: block;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -70,12 +70,19 @@ export const sendVerificationEmail = () => async (
   getState,
   { getFirebase }
 ) => {
+  dispatch({ type: actionTypes.VERIFICATION_EMAIL_START });
   const user = getFirebase().auth().currentUser;
   try {
     await user.sendEmailVerification();
-    // dispatch email sent message here
+    dispatch({
+      type: actionTypes.VERIFICATION_EMAIL_SUCCESS,
+    });
     console.log('email sent');
   } catch (err) {
+    dispatch({
+      type: actionTypes.VERIFICATION_EMAIL_FAIL,
+      payload: err.message,
+    });
     console.log(err.message);
     // dispatch email fail message here
   }
@@ -88,9 +95,6 @@ export const updateProfile = data => async (
 ) => {
   const firestore = getFirestore();
   const firebase = getFirebase();
-  console.log(firebase);
-  console.log(firebase.auth());
-  console.log(firebase.auth().currentUser);
   const userId = getState().firebase.auth.uid;
   dispatch({ type: actionTypes.AUTH_START });
   try {

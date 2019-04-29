@@ -4,6 +4,8 @@ const initialState = {
   authError: null,
   profileError: null,
   loadingAuth: false,
+  verificationEmailError: null,
+  loadingEmail: null,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -31,6 +33,19 @@ export default (state = initialState, { type, payload }) => {
 
     case actionTypes.AUTH_END:
       return { ...state, loadingAuth: false };
+
+    case actionTypes.VERIFICATION_EMAIL_START:
+      return { ...state, loadingEmail: true };
+
+    case actionTypes.VERIFICATION_EMAIL_SUCCESS:
+      return { ...state, verificationEmailError: null, loadingEmail: false };
+
+    case actionTypes.VERIFICATION_EMAIL_FAIL:
+      return {
+        ...state,
+        verificationEmailError: payload,
+        loadingEmail: null,
+      };
 
     default:
       return state;

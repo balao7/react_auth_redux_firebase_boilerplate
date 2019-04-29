@@ -9,10 +9,22 @@ import Login from './containers/auth/login/Login';
 import SignUp from './containers/auth/signup/Signup';
 import Profile from './containers/auth/profile/Profile';
 import Logout from './containers/auth/logout/Logout';
+import VerifyEmail from './containers/auth/verifyEmail/VerifyEmail';
 
 function App({ auth }) {
+  console.log(auth.emailVerified);
   let routes;
-  if (auth.uid) {
+
+  // logged but not verified
+  if (auth.uid && auth.emailVerified === false) {
+    console.log('got here');
+    routes = (
+      <Switch>
+        <Route path="/verify-email" component={VerifyEmail} />
+        <Redirect to="/verify-email" />
+      </Switch>
+    );
+  } else if (auth.uid) {
     // logged routes
     routes = (
       <Switch>
@@ -24,6 +36,7 @@ function App({ auth }) {
       </Switch>
     );
   }
+
   // not logged routes
   else {
     routes = (

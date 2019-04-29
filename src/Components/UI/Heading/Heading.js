@@ -26,6 +26,11 @@ const Heading = ({ type, children }) => {
         <h4 className={`${styles.Heading} ${styles.H4}`}>{children}</h4>
       );
       break;
+    case 'h5':
+      heading = (
+        <h5 className={`${styles.Heading} ${styles.H5}`}>{children}</h5>
+      );
+      break;
     default:
       heading = (
         <h1 className={`${styles.Heading} ${styles.H1}`}>{children}</h1>

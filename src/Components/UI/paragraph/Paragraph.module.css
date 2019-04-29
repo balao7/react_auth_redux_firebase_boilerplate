@@ -1,0 +1,5 @@
+.Paragraph {
+  font-size: 1.6rem;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}

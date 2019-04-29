@@ -10,7 +10,11 @@ const Navbar = ({ auth, profile }) => {
       <div className={styles.Wrapper}>
         <div className={styles.NavLeft}>Your logo here</div>
         <nav className={styles.NavRight}>
-          <ul className={styles.NavUl}>
+          <ul
+            className={`${styles.NavUl} ${
+              profile.isLoaded ? styles.NavUlShow : null
+            }`}
+          >
             {auth.uid ? (
               <SignedLinks auth={auth} profile={profile} />
             ) : (
