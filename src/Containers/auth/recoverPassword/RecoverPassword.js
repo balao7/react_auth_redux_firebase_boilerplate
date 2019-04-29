@@ -1,9 +1,9 @@
 import React from 'react';
-import { Formik, Form, Field, yupToFormErrors } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 
-import styles from './Signup.module.css';
+import styles from './RecoverPassword.module.css';
 import Input from '../../../components/UI/forms/input/Input';
 import Button from '../../../components/UI/button/Button';
 import Heading from '../../../components/UI/heading/Heading';
@@ -13,8 +13,7 @@ import SuccessMessage from '../../../components/UI/messages/successMessage/Succe
 import * as actions from '../../../store/actions';
 
 const ResetPasswordSchema = Yup.object().shape({
-  email: yupToFormErrors
-    .toString()
+  email: Yup.string()
     .email('Invalid email.')
     .required('Email is required.'),
 });
@@ -52,14 +51,12 @@ const RecoverPassword = ({ resetPassword, error, loading }) => {
       <SuccessMessage show={loading === false ? true : false}>
         Check your email to recover your password.
       </SuccessMessage>
-      <ErrorMessage show={}>
-        {verificationEmailError}
-      </ErrorMessage>
+      <ErrorMessage show={error}>{error}</ErrorMessage>
     </div>
   );
 };
 
-const mapStateToProps = ({auth}) => ({
+const mapStateToProps = ({ auth }) => ({
   error: auth.passwordRecovery.error,
   loading: auth.passwordRecovery.loading,
 });

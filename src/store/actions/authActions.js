@@ -14,6 +14,10 @@ export const signUp = data => async (
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password);
 
+    const user = firebase.auth().currentUser;
+    await user.sendEmailVerification();
+    console.log('sent');
+
     // save user to firebase with the doc id being the new created id we got from the response
     await firestore
       .collection('users')
@@ -27,7 +31,6 @@ export const signUp = data => async (
     dispatch({
       type: actionTypes.SIGNUP_SUCCESS,
     });
-    dispatch(sendVerificationEmail());
   } catch (err) {
     dispatch({
       type: actionTypes.SIGNUP_FAIL,
@@ -94,7 +97,6 @@ export const updateProfile = data => async (
   { getFirestore, getFirebase }
 ) => {
   const firestore = getFirestore();
-  const firebase = getFirebase();
   const userId = getState().firebase.auth.uid;
   dispatch({ type: actionTypes.AUTH_START });
   try {

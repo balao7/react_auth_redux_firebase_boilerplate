@@ -1,5 +1,6 @@
 .Button {
   padding: 1rem 3rem;
+  margin-bottom: 2rem;
   background-color: var(--color-primary);
   color: var(--color-white);
   font-weight: 700;
@@ -8,6 +9,7 @@
   border-radius: 0.5rem;
   box-shadow: 0rem 0.3rem 1.5rem var(--shadow);
   cursor: pointer;
+  width: 100%;
   outline: none;
   user-select: none;
   transition: all 0.2s;

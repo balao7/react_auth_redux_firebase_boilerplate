@@ -69,7 +69,7 @@ const verificationEmailStart = state => {
 const verificationEmailSuccess = state => {
   return updateObject(state, {
     verificationEmail: updateObject(state.verificationEmail, {
-      error: null,
+      error: false,
       loading: false,
     }),
   });

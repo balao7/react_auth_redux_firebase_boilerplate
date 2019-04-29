@@ -25,7 +25,7 @@ const VerifyEmail = ({ sendVerification, error, loading }) => {
       <Button loading={loading} onClick={sendVerification}>
         Send again
       </Button>
-      <SuccessMessage show={loading === false ? true : false}>
+      <SuccessMessage show={!loading && error === false}>
         Verification email sent.
       </SuccessMessage>
       <ErrorMessage show={error}>{error}</ErrorMessage>
