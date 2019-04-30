@@ -1,5 +1,6 @@
 .FormWrapper {
   max-width: 70rem;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,4 +29,67 @@
   color: var(--color-red);
   font-size: 1.3rem;
   font-weight: 700;
+}
+
+.Delete {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  font-weight: 700;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: var(--color-red);
+  transition: all 0.2s;
+}
+
+.Delete:hover {
+  transform: translateY(-3px);
+}
+
+.Delete:active {
+  transform: translateY(1px);
+}
+
+/* Popup confirmation */
+
+.ModalWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+
+.CancelBtn {
+  color: var(--color-primary);
+}
+
+.ConfirmBtn {
+  color: var(--color-red);
+}
+
+.CancelBtn,
+.ConfirmBtn {
+  font-weight: 700;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 1rem;
+}
+
+.CancelBtn:hover,
+.ConfirmBtn:hover {
+  transform: translateY(-3px);
+}
+
+.CancelBtn:active,
+.ConfirmBtn:active {
+  transform: translateY(2px);
 }

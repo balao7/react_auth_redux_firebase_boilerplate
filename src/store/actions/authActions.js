@@ -106,7 +106,6 @@ export const updateProfile = data => async (
     // if password passes form validation, update it
     if (data.password.length > 0) {
       await user.updatePassword(data.password);
-      console.log('updated');
     }
 
     // save user to firebase with the doc id being the new created id we got from the response
@@ -143,5 +142,33 @@ export const resetPassword = email => async (
       type: actionTypes.RECOVER_PASSWORD_FAIL,
       payload: error.message,
     });
+  }
+};
+
+export const deleteUser = () => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  dispatch({
+    type: actionTypes.DELETE_USER_START,
+  });
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  const user = firebase.auth().currentUser;
+  const userId = getState().firebase.auth.uid;
+  try {
+    // delete user from auth system
+    await user.delete();
+
+    //delete profile from firestore
+    await firestore
+      .collection('users')
+      .doc(userId)
+      .delete();
+
+    dispatch({ type: actionTypes.DELETE_USER_SUCCESS });
+  } catch (error) {
+    dispatch({ type: actionTypes.DELETE_USER_FAIL, payload: error.message });
   }
 };

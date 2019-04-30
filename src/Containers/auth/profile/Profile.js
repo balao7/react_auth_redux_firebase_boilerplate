@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -9,6 +9,7 @@ import Button from '../../../components/UI/button/Button';
 import Heading from '../../../components/UI/heading/Heading';
 import ErrorMessage from '../../../components/UI/messages/errorMessage/ErrorMessage';
 import SuccessMessage from '../../../components/UI/messages/successMessage/SuccessMessage';
+import Modal from '../../../components/UI/Modal/Modal';
 
 import * as actions from '../../../store/actions';
 
@@ -36,7 +37,17 @@ const Profilechema = Yup.object().shape({
   }),
 });
 
-const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
+const Profile = ({
+  clear,
+  error,
+  firebase,
+  updateProfile,
+  loading,
+  deleteUser,
+  deleteUserError,
+  deleteUserLoading,
+}) => {
+  const [deleteOpened, setDeleteOpened] = useState(false);
   useEffect(() => {
     return () => {
       clear();
@@ -111,6 +122,28 @@ const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
         Profile Updated
       </SuccessMessage>
       <ErrorMessage show={error}>{error}</ErrorMessage>
+      <div onClick={() => setDeleteOpened(true)} className={styles.Delete}>
+        Delete my account
+      </div>
+
+      <Modal opened={deleteOpened} close={() => setDeleteOpened(false)}>
+        <div className={styles.ModalWrapper}>
+          <Heading type="h5">
+            Are you sure you want to delete your account?
+          </Heading>
+          <ErrorMessage show={deleteUserError}>{deleteUserError}</ErrorMessage>
+          <div className={styles.buttonWrapper}>
+            <Button
+              onClick={() => deleteUser()}
+              loading={deleteUserLoading}
+              red
+            >
+              Delete
+            </Button>
+            <Button onClick={() => setDeleteOpened(false)}>Cancel</Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
@@ -119,10 +152,13 @@ const mapStateToProps = ({ firebase, auth }) => ({
   firebase,
   error: auth.profile.error,
   loading: auth.profile.loading,
+  deleteUserError: auth.deleteUser.error,
+  deleteUserLoading: auth.deleteUser.loading,
 });
 
 const mapDispatchToProps = {
   updateProfile: actions.updateProfile,
+  deleteUser: actions.deleteUser,
   clear: actions.clear,
 };
 

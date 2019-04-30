@@ -14,6 +14,10 @@ const initialState = {
     error: null,
     loading: false,
   },
+  deleteUser: {
+    error: null,
+    loading: false,
+  },
   error: null,
   loading: false,
 };
@@ -120,6 +124,27 @@ const recoverPasswordFail = (state, payload) => {
   });
 };
 
+const userDeleteStart = state => {
+  return updateObject(state, {
+    deleteUser: updateObject(state.deleteUser, { loading: true }),
+  });
+};
+
+const userDeleteSuccess = state => {
+  return updateObject(state, {
+    deleteUser: updateObject(state.deleteUser, { loading: false, error: null }),
+  });
+};
+
+const userDeleteFail = (state, payload) => {
+  return updateObject(state, {
+    deleteUser: updateObject(state.deleteUser, {
+      loading: false,
+      error: payload,
+    }),
+  });
+};
+
 const clear = state => {
   return updateObject(state, {
     profile: updateObject(state.profile, {
@@ -131,6 +156,7 @@ const clear = state => {
     passwordRecovery: updateObject(state.passwordRecovery, {
       error: null,
     }),
+    deleteUser: updateObject(state.deleteUser, { error: null }),
     error: null,
   });
 };
@@ -181,6 +207,15 @@ export default (state = initialState, { type, payload }) => {
 
     case actionTypes.RECOVER_PASSWORD_FAIL:
       return recoverPasswordFail(state, payload);
+
+    case actionTypes.DELETE_USER_START:
+      return userDeleteStart(state);
+
+    case actionTypes.DELETE_USER_SUCCESS:
+      return userDeleteSuccess(state);
+
+    case actionTypes.DELETE_USER_FAIL:
+      return userDeleteFail(state, payload);
 
     case actionTypes.CLEAR:
       return clear(state);
