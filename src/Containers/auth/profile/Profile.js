@@ -24,6 +24,16 @@ const Profilechema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email.')
     .required('Email is required.'),
+  password: Yup.string().min(
+    8,
+    'Password is too short - should be 8 chars minimum.'
+  ),
+  passwordConfirmation: Yup.string().when('password', {
+    is: val => val.length > 0,
+    then: Yup.string()
+      .required('You have to re-type your password.')
+      .oneOf([Yup.ref('password'), null], 'Passwords must match.'),
+  }),
 });
 
 const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
@@ -41,6 +51,8 @@ const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
           firstName: firebase.profile.firstName,
           lastName: firebase.profile.lastName,
           email: firebase.auth.email,
+          password: '',
+          passwordConfirmation: '',
         }}
         validationSchema={Profilechema}
         onSubmit={(values, { setSubmitting }) => {
@@ -71,6 +83,20 @@ const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
               component={Input}
             />
 
+            <Field
+              type="password"
+              name="password"
+              placeholder="New password"
+              component={Input}
+            />
+
+            <Field
+              type="password"
+              name="passwordConfirmation"
+              placeholder="Confirm New password"
+              component={Input}
+            />
+
             <Button
               loading={loading}
               type="submit"
@@ -82,7 +108,7 @@ const Profile = ({ clear, error, firebase, updateProfile, loading }) => {
         )}
       </Formik>
       <SuccessMessage show={!loading && error === false}>
-        Updated
+        Profile Updated
       </SuccessMessage>
       <ErrorMessage show={error}>{error}</ErrorMessage>
     </div>

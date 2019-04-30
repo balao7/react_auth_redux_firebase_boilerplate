@@ -103,6 +103,12 @@ export const updateProfile = data => async (
       await user.updateEmail(data.email);
     }
 
+    // if password passes form validation, update it
+    if (data.password.length > 0) {
+      await user.updatePassword(data.password);
+      console.log('updated');
+    }
+
     // save user to firebase with the doc id being the new created id we got from the response
     await firestore
       .collection('users')
