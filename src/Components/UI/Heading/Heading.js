@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Heading.module.css';
 
-const Heading = ({ type, children }) => {
+const Heading = ({ type, children, red }) => {
   let heading;
 
   switch (type) {

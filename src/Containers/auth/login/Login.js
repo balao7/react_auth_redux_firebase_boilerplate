@@ -9,6 +9,7 @@ import Button from '../../../components/UI/button/Button';
 import Heading from '../../../components/UI/heading/Heading';
 import ErrorMessage from '../../../components/UI/messages/errorMessage/ErrorMessage';
 import CustomLink from '../../../components/UI/Links/CustomLink';
+import GoogleButton from '../../../components/UI/button/googleButton/GoogleButton';
 
 import * as actions from '../../../store/actions';
 
@@ -19,7 +20,7 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('No password provided.'),
 });
 
-const Login = ({ signIn, error, loading, clear }) => {
+const Login = ({ signIn, signInGoogle, error, loading, clear }) => {
   useEffect(() => {
     return () => {
       clear();
@@ -68,6 +69,7 @@ const Login = ({ signIn, error, loading, clear }) => {
       <CustomLink to="/recover-password">
         <Heading type="h5">Forgot your password?</Heading>
       </CustomLink>
+      <GoogleButton onClick={signInGoogle} text="Sign in with Google" />
       <ErrorMessage show={error}>{error}</ErrorMessage>
     </div>
   );
@@ -81,6 +83,7 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = {
   signIn: actions.signIn,
   clear: actions.clear,
+  signInGoogle: actions.signInGoogle,
 };
 
 export default connect(

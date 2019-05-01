@@ -39,6 +39,24 @@ export const signUp = data => async (
   dispatch({ type: actionTypes.AUTH_END });
 };
 
+export const signInGoogle = () => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  dispatch({ type: actionTypes.AUTH_START });
+  const firebase = getFirebase();
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  try {
+    await firebase.auth().signInWithPopup(provider);
+    dispatch({ type: actionTypes.AUTH_SUCCESS });
+  } catch (error) {
+    dispatch({ type: actionTypes.AUTH_FAIL, payload: error.message });
+  }
+  dispatch({ type: actionTypes.AUTH_END });
+};
+
 export const signIn = data => async (dispatch, getState, { getFirebase }) => {
   // We get a firebase instance here
   const firebase = getFirebase();
@@ -160,14 +178,13 @@ export const deleteUser = () => async (
   try {
     // delete user from auth system
     await user.delete();
+    dispatch({ type: actionTypes.DELETE_USER_SUCCESS });
 
     //delete profile from firestore
     await firestore
       .collection('users')
       .doc(userId)
       .delete();
-
-    dispatch({ type: actionTypes.DELETE_USER_SUCCESS });
   } catch (error) {
     dispatch({ type: actionTypes.DELETE_USER_FAIL, payload: error.message });
   }

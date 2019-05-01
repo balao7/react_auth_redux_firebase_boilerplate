@@ -8,7 +8,7 @@ const SignedLinks = ({ auth, profile }) => {
       <NavigationItem link="/">Home</NavigationItem>
       <NavigationItem link="/protected">Protected Page</NavigationItem>
       <NavigationItem link="/profile">
-        {`${profile.firstName} ${profile.lastName}`}
+        {`${profile.firstName || 'Account'}`}
       </NavigationItem>
 
       <NavigationItem link="/logout">Logout</NavigationItem>

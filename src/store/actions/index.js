@@ -2,6 +2,7 @@ export {
   signIn,
   signOut,
   signUp,
+  signInGoogle,
   resetPassword,
   updateProfile,
   sendVerificationEmail,

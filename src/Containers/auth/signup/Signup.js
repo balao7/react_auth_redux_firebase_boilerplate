@@ -8,6 +8,7 @@ import Input from '../../../components/UI/forms/input/Input';
 import Button from '../../../components/UI/button/Button';
 import Heading from '../../../components/UI/heading/Heading';
 import ErrorMessage from '../../../components/UI/messages/errorMessage/ErrorMessage';
+import GoogleButton from '../../../components/UI/button/googleButton/GoogleButton';
 
 import * as actions from '../../../store/actions';
 
@@ -31,7 +32,7 @@ const SignupSchema = Yup.object().shape({
     .required('You must re-type your password.'),
 });
 
-const SignUp = ({ signUp, error, loading, clear }) => {
+const SignUp = ({ signUp, signInGoogle, error, loading, clear }) => {
   useEffect(() => {
     return () => {
       clear();
@@ -102,6 +103,7 @@ const SignUp = ({ signUp, error, loading, clear }) => {
           </Form>
         )}
       </Formik>
+      <GoogleButton onClick={signInGoogle} text="Sign up with Google" />
       <ErrorMessage show={error}>{error}</ErrorMessage>
     </div>
   );
@@ -115,6 +117,7 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = {
   signUp: actions.signUp,
   clear: actions.clear,
+  signInGoogle: actions.signInGoogle,
 };
 
 export default connect(
